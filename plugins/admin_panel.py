@@ -36,14 +36,14 @@ async def tutorial(bot,message):
 	    text =Txt.FILE_NAME_TXT.format(format_template=format_template),
 	    disable_web_page_preview=True,
 	    reply_markup=InlineKeyboardMarkup([
-        			[InlineKeyboardButton("🦋 Admin",url = "https://t.me/CallAdminRobot"), 
-        			InlineKeyboardButton("⚡ Tutorial",url = "https://t.me/MadflixBots_Support") ]])
+        			[InlineKeyboardButton("🦋 Admin",url = "https://t.me/spy_radios"), 
+        			InlineKeyboardButton("⚡ Tutorial",url = "https://t.me/paradox_bots") ]])
 	)
 
 
 @Client.on_message(filters.command(["stats", "status"]) & filters.user(Config.ADMIN))
 async def get_stats(bot, message):
-    total_users = await madflixbotz.total_users_count()
+    total_users = await patadox_bots.total_users_count()
     uptime = time.strftime("%Hh%Mm%Ss", time.gmtime(time.time() - bot.uptime))    
     start_t = time.time()
     st = await message.reply('**Accessing The Details.....**')    
@@ -54,14 +54,14 @@ async def get_stats(bot, message):
 @Client.on_message(filters.command("broadcast") & filters.user(Config.ADMIN) & filters.reply)
 async def broadcast_handler(bot: Client, m: Message):
     await bot.send_message(Config.LOG_CHANNEL, f"{m.from_user.mention} or {m.from_user.id} Is Started The Broadcast......")
-    all_users = await madflixbotz.get_all_users()
+    all_users = await paradoxbots.get_all_users()
     broadcast_msg = m.reply_to_message
     sts_msg = await m.reply_text("Broadcast Started..!") 
     done = 0
     failed = 0
     success = 0
     start_time = time.time()
-    total_users = await madflixbotz.total_users_count()
+    total_users = await paradox_bots.total_users_count()
     async for user in all_users:
         sts = await send_msg(user['_id'], broadcast_msg)
         if sts == 200:
@@ -69,7 +69,7 @@ async def broadcast_handler(bot: Client, m: Message):
         else:
            failed += 1
         if sts == 400:
-           await madflixbotz.delete_user(user['_id'])
+           await paradox_bots.delete_user(user['_id'])
         done += 1
         if not done % 20:
            await sts_msg.edit(f"Broadcast In Progress: \n\nTotal Users {total_users} \nCompleted : {done} / {total_users}\nSuccess : {success}\nFailed : {failed}")
