@@ -131,7 +131,7 @@ def extract_episode_number(filename):
     return None
 
 # Example Usage:
-filename = "Naruto Shippuden S01 - EP07 - 1080p [Dual Audio] @Madflix_Bots.mkv"
+filename = "Naruto Shippuden S01 - EP07 - 1080p [Dual Audio] @paradox_bots.mkv"
 episode_number = extract_episode_number(filename)
 print(f"Extracted Episode Number: {episode_number}")
 
@@ -140,8 +140,8 @@ print(f"Extracted Episode Number: {episode_number}")
 async def auto_rename_files(client, message):
     user_id = message.from_user.id
     firstname = message.from_user.first_name
-    format_template = await madflixbotz.get_format_template(user_id)
-    media_preference = await madflixbotz.get_media_preference(user_id)
+    format_template = await paradox_bots.get_format_template(user_id)
+    media_preference = await paradox_bots.get_media_preference(user_id)
 
     if not format_template:
         return await message.reply_text("Please Set An Auto Rename Format First Using /autorename")
